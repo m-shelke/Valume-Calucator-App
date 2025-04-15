@@ -1,9 +1,9 @@
 package com.example.valumecalucatorapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -14,7 +14,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         //calling DiagramModel class and passing req. constructor parameter that is Diagram Image and Diagram Name
-        DiagramModel model1 = new DiagramModel(R.drawable.sphere,"Sphere");
-        DiagramModel model2 = new DiagramModel(R.drawable.cylinder,"Cylinder");
-        DiagramModel model3 = new DiagramModel(R.drawable.cube,"Cube");
-        DiagramModel model4 = new DiagramModel(R.drawable.prism,"Prism");
+        DiagramModel model1 = new DiagramModel(R.drawable.sphere, "Sphere");
+        DiagramModel model2 = new DiagramModel(R.drawable.cylinder, "Cylinder");
+        DiagramModel model3 = new DiagramModel(R.drawable.cube, "Cube");
+        DiagramModel model4 = new DiagramModel(R.drawable.prism, "Prism");
 
         //adding data to arraylist
         arrayList.add(model1);
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         arrayList.add(model4);
 
         //calling Adapter Class and passing Data Source and Context of Application
-        adapter = new DiagramAdapter(arrayList,getApplicationContext());
+        adapter = new DiagramAdapter(arrayList, getApplicationContext());
 
         //set adapter to GridLayout
         gridView.setAdapter(adapter);
@@ -71,7 +70,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //showing Toast message
-                Toast.makeText(MainActivity.this, "Diagram click: "+adapter.getItem(position).getDiagramName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Diagram click: " + adapter.getItem(position).getDiagramName(), Toast.LENGTH_SHORT).show();
+
+                if (adapter.getItem(position).getDiagramName() == model1.getDiagramName()) {
+
+                    //start new Activity on GridView's items clicked, using Intent class
+                    Intent intent = new Intent(MainActivity.this, SphereActivity.class);
+                    //starting Activity
+                    startActivity(intent);
+                }
+
+                //handling clicked event on gridView item clicked
+                if (adapter.getItem(position).getDiagramName() == "Cylinder") {
+
+                    //start new Activity on GridView's items clicked, using Intent class
+                    Intent intent = new Intent(MainActivity.this, CylinderActivity.class);
+                    //starting Activity
+                    startActivity(intent);
+                }
+
+                //handling clicked event on gridView item clicked
+                if (adapter.getItem(position).getDiagramName() == "Cube") {
+
+                    //start new Activity on GridView's items clicked, using Intent class
+                    Intent intent = new Intent(MainActivity.this, CubeActivity.class);
+                    //starting Activity
+                    startActivity(intent);
+                }
+
+                //handling clicked event on gridView item clicked
+                if (adapter.getItem(position).getDiagramName() == model4.diagramName) {
+
+                    //start new Activity on GridView's items clicked, using Intent class
+                    Intent intent = new Intent(MainActivity.this, PrismActivity.class);
+                    //starting Activity
+                    startActivity(intent);
+                }
             }
         });
     }
